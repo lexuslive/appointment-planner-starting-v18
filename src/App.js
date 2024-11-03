@@ -20,7 +20,7 @@ function App() {
   };
 
   const addAppointment = (name, contact, date, time) => {
-    setContacts([
+    setAppointments([
       ...appointments,
       {
         name: name,

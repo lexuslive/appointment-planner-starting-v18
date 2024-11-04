@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-
 import { ContactForm } from "../../components/contactForm/ContactForm";
 import { TileList } from "../../components/tileList/TileList";
 
@@ -10,13 +9,9 @@ export const ContactsPage = ({ contacts, addContact }) => {
   const [duplicate, setDuplicate] = useState(false);
 
   useEffect(() => {
-    const nameIsDuplicate = () => {
-      const found = contacts.find((contact) => contact.name === name);
-      return found === true;
-    };
-
-    nameIsDuplicate ? setDuplicate(true) : setDuplicate(false);
-  }, [name, contacts, duplicate]);
+    const isDuplicate = contacts.some(contact => contact.name === name);
+    setDuplicate(isDuplicate);
+  }, [name, contacts]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -32,7 +27,6 @@ export const ContactsPage = ({ contacts, addContact }) => {
     <div>
       <section>
         <h2>Add Contact</h2>
-        {duplicate ? ' - Name Already Exists' : ''}
         <ContactForm
           name={name}
           setName={setName}
